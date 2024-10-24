@@ -1,12 +1,16 @@
-package me.yeunikey.contester.entities;
+package me.yeunikey.contester.entities.profile;
 
 import jakarta.persistence.*;
+import me.yeunikey.contester.entities.Attempt;
+import me.yeunikey.contester.entities.Group;
+import me.yeunikey.contester.entities.Profile;
+import me.yeunikey.contester.entities.User;
 
 import java.util.List;
 
 @Entity
 @Table(name = "students")
-public class Student extends User {
+public class Student extends Profile {
 
     @Column(name = "name")
     private String name;

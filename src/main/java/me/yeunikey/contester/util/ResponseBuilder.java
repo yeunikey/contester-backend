@@ -2,6 +2,7 @@ package me.yeunikey.contester.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import me.yeunikey.contester.ContesterApplication;
 import org.springframework.http.ResponseEntity;
 
 import java.time.Instant;
@@ -41,6 +42,11 @@ public class ResponseBuilder {
 
     public ResponseBuilder data(JsonElement data) {
         this.data = data;
+        return this;
+    }
+
+    public ResponseBuilder data(Object object) {
+        this.data = ContesterApplication.gson().toJsonTree(object).getAsJsonObject();
         return this;
     }
 

@@ -8,11 +8,7 @@ import java.util.List;
 public class BaseService<O, K, S extends JpaRepository<O, K>> {
 
     @Autowired
-    private final S repository;
-
-    public BaseService(S service) {
-        this.repository = service;
-    }
+    private S repository;
 
     public List<O> findAll() {
         return repository.findAll();
@@ -28,6 +24,10 @@ public class BaseService<O, K, S extends JpaRepository<O, K>> {
 
     public void delete(O object) {
         repository.delete(object);
+    }
+
+    public S repository() {
+        return repository;
     }
 
 }

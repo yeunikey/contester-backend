@@ -1,6 +1,7 @@
 package me.yeunikey.contester.entities;
 
 import jakarta.persistence.*;
+import me.yeunikey.contester.entities.profile.Student;
 
 import java.util.List;
 
