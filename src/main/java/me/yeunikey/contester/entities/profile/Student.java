@@ -1,16 +1,17 @@
 package me.yeunikey.contester.entities.profile;
 
 import jakarta.persistence.*;
-import me.yeunikey.contester.entities.Attempt;
 import me.yeunikey.contester.entities.Group;
 import me.yeunikey.contester.entities.Profile;
 import me.yeunikey.contester.entities.User;
 
-import java.util.List;
-
 @Entity
 @Table(name = "students")
 public class Student extends Profile {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
+    private User user;
 
     @Column(name = "name")
     private String name;
@@ -25,9 +26,6 @@ public class Student extends Profile {
     @JoinColumn(name = "teacherId")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Attempt> attempts;
-
     public Student() {
     }
 
@@ -36,6 +34,14 @@ public class Student extends Profile {
         this.surname = surname;
         this.group = group;
         this.teacher = teacher;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -70,11 +76,4 @@ public class Student extends Profile {
         this.teacher = teacher;
     }
 
-    public List<Attempt> getAttempts() {
-        return attempts;
-    }
-
-    public void setAttempts(List<Attempt> attempts) {
-        this.attempts = attempts;
-    }
 }

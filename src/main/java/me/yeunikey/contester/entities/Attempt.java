@@ -1,7 +1,6 @@
 package me.yeunikey.contester.entities;
 
 import jakarta.persistence.*;
-import me.yeunikey.contester.entities.profile.Student;
 
 @Entity
 @Table(name = "attempts")
@@ -13,7 +12,7 @@ public class Attempt {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private Student studentId;
+    private User userId;
 
     public Attempt() {
     }
@@ -26,11 +25,11 @@ public class Attempt {
         this.uniqueId = uniqueId;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 }

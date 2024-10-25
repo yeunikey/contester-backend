@@ -1,5 +1,6 @@
 package me.yeunikey.contester.entities;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,14 +8,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uniqueId;
+    private String uniqueId = UUID.randomUUID().toString();
     @Column(name = "password")
     private String password;
 
@@ -23,6 +25,9 @@ public class User implements UserDetails {
 
     @Column(name = "profileId")
     private String profileId;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attempt> attempts;
 
     public User() {
     }
@@ -33,6 +38,7 @@ public class User implements UserDetails {
         this.profileId = profileId;
     }
 
+    @JsonValue
     public String getUniqueId() {
         return uniqueId;
     }
@@ -74,5 +80,13 @@ public class User implements UserDetails {
 
     public void setProfileId(String profileId) {
         this.profileId = profileId;
+    }
+
+    public List<Attempt> getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(List<Attempt> attempts) {
+        this.attempts = attempts;
     }
 }

@@ -1,16 +1,15 @@
 package me.yeunikey.contester.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+
+import java.util.UUID;
 
 @MappedSuperclass
 public abstract class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uniqueId;
+    private String uniqueId = UUID.randomUUID().toString();
 
     public Profile() {
     }

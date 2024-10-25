@@ -1,5 +1,6 @@
 package me.yeunikey.contester.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import me.yeunikey.contester.entities.profile.Student;
 
@@ -13,6 +14,7 @@ public class Group {
     private String groupId;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Student> students;
 
     public Group() {

@@ -31,7 +31,7 @@ public class ResponseBuilder {
     }
 
     public ResponseBuilder error() {
-        this.status = ResponseStatus.SUCCESS;
+        this.status = ResponseStatus.ERROR;
         return this;
     }
 
@@ -46,7 +46,7 @@ public class ResponseBuilder {
     }
 
     public ResponseBuilder data(Object object) {
-        this.data = ContesterApplication.gson().toJsonTree(object).getAsJsonObject();
+        this.data = ContesterApplication.gson().toJsonTree(object);
         return this;
     }
 

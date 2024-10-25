@@ -11,6 +11,7 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> exception(Exception exception) {
+//        throw new RuntimeException(exception);
         return ResponseBuilder.builder()
                 .status(ResponseStatus.ERROR)
                 .message(exception.getMessage())

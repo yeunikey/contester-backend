@@ -1,14 +1,18 @@
 package me.yeunikey.contester.entities.profile;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import me.yeunikey.contester.entities.Profile;
 import me.yeunikey.contester.entities.User;
 
 @Entity
 @Table(name = "teachers")
 public class Teacher extends Profile {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
+    @JsonIgnore
+    private User user;
 
     @Column(name = "name")
     private String name;
@@ -18,9 +22,18 @@ public class Teacher extends Profile {
     public Teacher() {
     }
 
-    public Teacher(String name, String surname) {
+    public Teacher(User user, String name, String surname) {
+        this.user = user;
         this.name = name;
         this.surname = surname;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
