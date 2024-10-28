@@ -1,12 +1,12 @@
 package me.yeunikey.contester.entities.assignments;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "codes")
 public class Code {
 
     @Id
@@ -15,8 +15,12 @@ public class Code {
     @Column(name = "language")
     private LanguageType languageType;
 
+    @Lob
     @Column(name = "bytes")
     private byte[] bytes;
+
+    @Column(name = "status")
+    private CodeStatus status = CodeStatus.NOT_CHECKED;
 
     public Code() {
     }
@@ -48,5 +52,13 @@ public class Code {
 
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
+    }
+
+    public CodeStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CodeStatus status) {
+        this.status = status;
     }
 }

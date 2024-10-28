@@ -1,5 +1,4 @@
 a = int(input())
-b = int(input())
+print(a)
 
-print("Plus - ", a + b)
-print("Multiply - ", a * b)
+

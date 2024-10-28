@@ -2,13 +2,11 @@ package me.yeunikey.contester.controller;
 
 import com.google.gson.Gson;
 import me.yeunikey.contester.ContesterApplication;
-import me.yeunikey.contester.controller.model.auth.StudentRes;
-import me.yeunikey.contester.controller.model.auth.login.LoginReq;
-import me.yeunikey.contester.controller.model.auth.login.LoginRes;
-import me.yeunikey.contester.entities.AccountType;
+import me.yeunikey.contester.controller.requests.StudentRes;
+import me.yeunikey.contester.controller.requests.auth.LoginReq;
+import me.yeunikey.contester.controller.requests.auth.LoginRes;
 import me.yeunikey.contester.entities.Group;
 import me.yeunikey.contester.entities.User;
-import me.yeunikey.contester.entities.profile.Student;
 import me.yeunikey.contester.services.GroupService;
 import me.yeunikey.contester.services.JwtService;
 import me.yeunikey.contester.services.UserService;
@@ -20,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -38,24 +37,6 @@ public class AuthController {
 
     public Gson gson() {
         return ContesterApplication.gson();
-    }
-
-    @GetMapping(path = "/test")
-    public void test() {
-        Student student = new Student(
-                "Ерасыл",
-                "Унербек",
-                groupService.find("SE-2402"),
-                null
-        );
-        User user = new User(
-                "1234",
-                AccountType.STUDENT,
-                student.getUniqueId()
-        );
-        student.setUser(user);
-        studentService.save(student);
-        userService.register(user);
     }
 
     @PostMapping(path = "/login")

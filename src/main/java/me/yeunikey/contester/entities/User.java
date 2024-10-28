@@ -28,6 +28,8 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attempt> attempts;
+    @Column(name = "role")
+    private Role role = Role.USER;
 
     public User() {
     }
@@ -49,7 +51,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority(role.toString()));
     }
 
     @Override
@@ -88,5 +90,13 @@ public class User implements UserDetails {
 
     public void setAttempts(List<Attempt> attempts) {
         this.attempts = attempts;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

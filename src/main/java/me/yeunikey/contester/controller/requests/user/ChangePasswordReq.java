@@ -1,4 +1,4 @@
-package me.yeunikey.contester.controller.model.user;
+package me.yeunikey.contester.controller.requests.user;
 
 public class ChangePasswordReq {
 

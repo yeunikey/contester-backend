@@ -37,17 +37,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+        if (path.startsWith("/v1/auth/") || path.startsWith("/v1/test/")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String header = request.getHeader(HEADER_NAME);
 
         if (header == null || header.isEmpty() || !header.startsWith(BEARER_PREFIX)) {
-            chain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         String jwt = header.substring(BEARER_PREFIX.length());
 
         if (!jwtService.validateToken(jwt)) {
-            chain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 

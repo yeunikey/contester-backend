@@ -3,6 +3,9 @@ package me.yeunikey.contester.util;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.yeunikey.contester.ContesterApplication;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.time.Instant;
@@ -69,7 +72,9 @@ public class ResponseBuilder {
     }
 
     public ResponseEntity<String> build() {
-        return ResponseEntity.ok(asJson().toString());
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<String>(asJson().toString(), httpHeaders, HttpStatus.OK);
     }
 
     public static ResponseBuilder builder() {

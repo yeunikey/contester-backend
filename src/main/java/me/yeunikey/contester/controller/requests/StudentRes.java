@@ -1,4 +1,4 @@
-package me.yeunikey.contester.controller.model.auth;
+package me.yeunikey.contester.controller.requests;
 
 public class StudentRes {
 

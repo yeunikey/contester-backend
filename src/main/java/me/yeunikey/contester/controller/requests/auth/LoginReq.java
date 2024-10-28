@@ -1,4 +1,4 @@
-package me.yeunikey.contester.controller.model.auth.login;
+package me.yeunikey.contester.controller.requests.auth;
 
 public class LoginReq {
 

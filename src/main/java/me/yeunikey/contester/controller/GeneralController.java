@@ -40,7 +40,6 @@ public class GeneralController {
             List<String> output = new ArrayList<>();
 
             String line;
-
             while ((line = reader.readLine()) != null) {
                 output.add(line);
             }

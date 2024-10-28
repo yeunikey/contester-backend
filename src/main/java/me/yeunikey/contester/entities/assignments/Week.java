@@ -1,13 +1,14 @@
 package me.yeunikey.contester.entities.assignments;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "weeks")
 public class Week {
 
     @Id
@@ -22,6 +23,9 @@ public class Week {
     private LocalDateTime startDate;
     @Column(name = "deadlineDate")
     private LocalDateTime deadlineDate;
+
+    @OneToMany(mappedBy = "weekId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Problem> problems = new ArrayList<>();
 
     public Week() {
     }
@@ -76,5 +80,13 @@ public class Week {
 
     public void setDeadlineDate(LocalDateTime deadlineDate) {
         this.deadlineDate = deadlineDate;
+    }
+
+    public List<Problem> getProblems() {
+        return problems;
+    }
+
+    public void setProblems(List<Problem> problems) {
+        this.problems = problems;
     }
 }

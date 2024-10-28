@@ -1,4 +1,4 @@
-package me.yeunikey.contester.controller;
+package me.yeunikey.contester.controller.exception;
 
 import me.yeunikey.contester.util.ResponseBuilder;
 import me.yeunikey.contester.util.ResponseStatus;
@@ -11,11 +11,11 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> exception(Exception exception) {
-//        throw new RuntimeException(exception);
-        return ResponseBuilder.builder()
-                .status(ResponseStatus.ERROR)
-                .message(exception.getMessage())
-                .build();
+        throw new RuntimeException(exception);
+//        return ResponseBuilder.builder()
+//                .status(ResponseStatus.ERROR)
+//                .message(exception.getMessage())
+//                .build();
     }
 
 }

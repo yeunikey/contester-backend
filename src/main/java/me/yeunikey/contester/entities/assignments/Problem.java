@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "problems")
 public class Problem {
 
     @Id
     private String uniqueId = UUID.randomUUID().toString();
+
+    @ManyToOne
+    @JoinColumn(name = "weekId")
+    private Week weekId;
 
     @Column(name = "title")
     private String title;
@@ -20,14 +25,19 @@ public class Problem {
     @Column(name = "lore")
     private String lore;
 
-    @Embedded
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "problem_id")
     private List<Test> tests;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "correctCode")
-    private Code correctCode;
-
     public Problem() {
+    }
+
+    public Problem(Week weekId, String title, Limits limits, String lore, List<Test> tests) {
+        this.weekId = weekId;
+        this.title = title;
+        this.limits = limits;
+        this.lore = lore;
+        this.tests = tests;
     }
 
     public String getUniqueId() {
@@ -36,6 +46,14 @@ public class Problem {
 
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
+    }
+
+    public Week getWeekId() {
+        return weekId;
+    }
+
+    public void setWeekId(Week weekId) {
+        this.weekId = weekId;
     }
 
     public String getTitle() {
@@ -70,11 +88,4 @@ public class Problem {
         this.tests = tests;
     }
 
-    public Code getCorrectCode() {
-        return correctCode;
-    }
-
-    public void setCorrectCode(Code correctCode) {
-        this.correctCode = correctCode;
-    }
 }
