@@ -118,7 +118,7 @@ public class WeekController {
         Week week = new Week(
                 body.getName(),
                 body.isClosed(),
-                LocalDateTime.now(),
+                body.getCreatedDate(),
                 body.getDeadlineDate()
         );
 
